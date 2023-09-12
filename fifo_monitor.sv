@@ -20,21 +20,41 @@ class fifo_monitor extends uvm_monitor;
   virtual task run_phase(uvm_phase phase);
     forever begin
       @(posedge vif.m_mp.clk)
-      if(vif.m_mp.m_cb.i_wren == 1)begin
-        $display("\nWR is high");
-        item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
+      if((vif.m_mp.m_cb.i_wren == 1)&&(vif.m_mp.m_cb.i_rden == 0))begin
+        $display("\nwrite enable is high and read enable is low");
+        item_got.data_in = vif.m_mp.m_cb.data_in;
         item_got.i_wren = 'b1;
         item_got.i_rden = 'b0;
         item_got.o_full = vif.m_mp.m_cb.o_full;
+        item_got.o_empty = vif.m_mp.m_cb.o_empty;
+        item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
+        item_got.o_alm_empty = vif.m_mp.m_cb.o_alm_empty;
         item_got_port.write(item_got);
       end
-      else if(vif.m_mp.m_cb.i_rden == 1)begin
+       if((vif.m_mp.m_cb.i_rden == 1)&&(vif.m_mp.m_cb.i_wren == 0))begin
         @(posedge vif.m_mp.clk)
-        $display("\nRD is high");
+        $display("\nwrite enable is low and read enable is high");
         item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
         item_got.i_rden = 'b1;
         item_got.i_wren = 'b0;
         item_got.o_empty = vif.m_mp.m_cb.o_empty;
+        item_got.o_full = vif.m_mp.m_cb.o_full;
+        item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
+        item_got.o_alm_empty = vif.m_mp.m_cb.o_alm_empty;
+        item_got_port.write(item_got);
+      end
+      if((vif.m_mp.m_cb.i_wren)&&(vif.m_mp.m_cb.i_rden) == 1)begin
+        $display("\nwrite enable and read enable is high");
+        item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
+        item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
+        item_got.i_wren = 'b1;
+        item_got.i_rden = 'b1;
+        item_got_port.write(item_got);
+      end
+        if((vif.m_mp.m_cb.i_wren==0)&&(vif.m_mp.m_cb.i_rden==0))begin
+        $display("\nwrite enable is high");
+        item_got.i_wren = 'b0;
+        item_got.i_rden = 'b0;
         item_got_port.write(item_got);
       end
     end
