@@ -14,7 +14,7 @@ class fifo_scoreboard extends uvm_scoreboard;
   int queue[$];
   
   function void write(input fifo_seq_item item_got);
-    bit [7:0] examdata;
+    bit [127:0] examdata;
     if(item_got.i_wren == 'b1)begin
       queue.push_back(item_got.i_wrdata);
       `uvm_info("write Data", $sformatf("wr: %0b rd: %0b i_wrdata: %0h o_full: %0b",item_got.i_wren, item_got.i_rden,item_got.i_wrdata, item_got.o_full), UVM_LOW);
