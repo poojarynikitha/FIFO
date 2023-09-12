@@ -8,7 +8,7 @@ class fifo_agent extends uvm_agent;
   fifo_sequencer f_seqr;
   fifo_driver f_dri;
   fifo_monitor f_mon;
-  `uvm_component_utils(f_agent)
+  `uvm_component_utils(fifo_agent)
   
   function new(string name = "fifo_agent", uvm_component parent);
     super.new(name, parent);
