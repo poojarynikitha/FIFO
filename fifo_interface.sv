@@ -36,6 +36,6 @@ clocking p_mon_cb @(posedge clk);
   endclocking
 
   modport driver_mp (input clk, reset, clocking d_cb);
-  modport act_monitor_mp (input clk, reset, clocking a_mon_cb);
-  modport pas_monitor_mp (input clk, reset, clocking p_mon_cb);
+  modport a_monitor_mp (input clk, reset, clocking a_mon_cb);
+  modport p_monitor_mp (input clk, reset, clocking p_mon_cb);
 endinterface
