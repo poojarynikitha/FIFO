@@ -1,3 +1,8 @@
+// Code your testbench here
+// or browse Examples
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
 class fifo_seq_item extends uvm_sequence_item;
   
   //---------------------------------------
@@ -6,7 +11,7 @@ class fifo_seq_item extends uvm_sequence_item;
   rand bit [127:0]i_wrdata;
   rand bit i_wren;
   rand bit i_rden;
-  bit 0_full;
+  bit o_full;
   bit o_empty;
   bit [127:0]o_rddata;
   
@@ -22,7 +27,7 @@ class fifo_seq_item extends uvm_sequence_item;
   `uvm_field_int(o_rddata, UVM_ALL_ON)
   `uvm_object_utils_end
   
-  constraint c1{rd!=wr;};
+  constraint c1{i_rden!=i_wren;};
   
   //---------------------------------------
   //Pre randomize function
@@ -44,4 +49,3 @@ class fifo_seq_item extends uvm_sequence_item;
   endfunction
   
 endclass
-
