@@ -26,3 +26,4 @@ interface fifo_interface(input clk, rstn);
   
   modport d_mp (input clk, rstn, clocking d_cb);
   modport m_mp (input clk, rstn, clocking m_cb);
+    endinterface
