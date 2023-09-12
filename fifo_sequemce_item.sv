@@ -1,5 +1,3 @@
-// Code your testbench here
-// or browse Examples
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
@@ -13,6 +11,8 @@ class fifo_seq_item extends uvm_sequence_item;
   rand bit i_rden;
   bit o_full;
   bit o_empty;
+  bit o_alm_full;
+  bit o_alm_empty;
   bit [127:0]o_rddata;
   
   //---------------------------------------
