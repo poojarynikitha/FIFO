@@ -30,7 +30,7 @@ module tb;
                .o_rddata(tif.o_rddata));
   
   initial begin
-    uvm_config_db#(virtual f_interface)::set(null, "", "vif", tif);
+    uvm_config_db#(virtual fifo_interface)::set(null, "", "vif", tif);
     $dumpfile("dump.vcd"); 
     $dumpvars;
     run_test("fifo_test");
