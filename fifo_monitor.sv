@@ -22,7 +22,7 @@ class fifo_monitor extends uvm_monitor;
       @(posedge vif.m_mp.clk)
       if((vif.m_mp.m_cb.i_wren == 1)&&(vif.m_mp.m_cb.i_rden == 0))begin
         $display("\nwrite enable is high and read enable is low");
-        item_got.data_in = vif.m_mp.m_cb.data_in;
+        item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
         item_got.i_wren = 'b1;
         item_got.i_rden = 'b0;
         item_got.o_full = vif.m_mp.m_cb.o_full;
